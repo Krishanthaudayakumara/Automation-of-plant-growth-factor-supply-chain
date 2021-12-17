@@ -35,6 +35,7 @@ int main(void)
 	DDRD=0xf0;
 
 	char key;
+	char numberString[4];
 
 	lcdint();
 	
@@ -83,96 +84,86 @@ int main(void)
 				lcdcmd(0xC0);
 				lcd_string(text,10);
 				_delay_ms(1000);
+				break;
 				
-		}
-		
-		
-		if (key == '3')
-		{
-			char numberString[4];   // we re defining an array of character. It will be utilized later to store integer to be displayed on the LCD screen
-
-			while(1) {
-				
-				uint16_t r;
-				
-				_delay_ms(100);
-
-				lcdcmd(0x01);
-				
-				//Set io port direction of sensor
-				HCSR04Init();
-
-				while(1)
-				{
+			case '3':
+				while(1) {
 					
-					//Send a trigger pulse
-					HCSR04Trigger();               // calling the ultrasonic sound wave generator function
+					uint16_t r;
 					
-					//Measure the width of pulse
-					r=GetPulseWidth();             // getting the duration of the ultrasound took to echo back after hitting the object
+					_delay_ms(100);
+
+					lcd_clear();
 					
-					//Handle Errors
-					if(r==US_ERROR)                // if microcontroller doesn't get any pulse then it will set the US_ERROR variable to -1
-					// the following code will check if there is error then it will be displayed on the LCD screen
-					{
-						lcdcmd(0x01);
-						lcdcmd(0x80);
-						lcd_string("E!",2);
-						_delay_ms(1000);
-						lcdcmd(0x01);
-					}
-					else
-					{
-						
-						distance=50-(r*0.034/2.0);	// This will give the distance in centimeters
-						
-						
-						
-						if (distance != previous_distance)    // the LCD screen only need to be cleared if the distance is changed otherwise it is not required
+					
+					HCSR04Init();
+
+					while(1)
+					{	
+						HCSR04Trigger();              
+						r=GetPulseWidth();
+						if(r==US_ERROR) 
 						{
-							lcdcmd(0x01);
-						}
-						
-						lcdcmd(0x01);
-						
-						lcdcmd(0x80);
-						lcd_string("WATER LV =",11);
-						
-						itoa(distance, numberString, 10);    // distance is an integer number, we can not display integer directly on the LCD. this line converts integer into array of character
-						lcd_string(numberString,3);
-
-						lcd_string("cm",2);
-						
-						
-						
-						
-						previous_distance = distance;
-						_delay_ms(30);
-						
-						if(distance<10)
-						{
-							lcdcmd(0xC0);
-							lcd_string("WATER LOW!!!",13);
-							// PORTA=(1<<PINA0);
+							lcd_clear();
+							lcd_string("E!",2);
+							_delay_ms(1000);
 							
 						}
-						if(distance>=10)
+						else
 						{
-							lcdcmd(0xC0);
-							lcd_string("ENOUGH WATER",12);
-							// PORTA=(0<<PINA0);
+							
+							distance=50-(r*0.034/2.0);	
+							
+							
+							
+							if (distance != previous_distance)    
+							{
+								lcd_clear();
+							}
+							
+	
+							
+							lcd_line_one();
+							lcd_string("WATER LV =",11);
+							
+							itoa(distance, numberString, 10);   
+							lcd_string(numberString,3);
+
+							lcd_string("cm",2);
+							
+							
+							previous_distance = distance;
+							_delay_ms(30);
+							
+							if(distance<10)
+							{
+								lcd_line_two();
+								lcd_string("WATER LOW!!!",13);
+								// PORTA=(1<<PINA0);
+								
+							}
+							if(distance>=10)
+							{
+								lcd_line_two();
+								lcd_string("ENOUGH WATER",12);
+								// PORTA=(0<<PINA0);
+								
+							}
+							key = scankey();
+							if(key == '*') break;
+							_delay_ms(1200);
 							
 						}
-						
-						_delay_ms(1200);
-						
 					}
+					
+				if(key == '*') break;
 				}
-				
+			break;		
 			}
+			
+							
 		}
-
-	}
+		
 }
 	
 	
