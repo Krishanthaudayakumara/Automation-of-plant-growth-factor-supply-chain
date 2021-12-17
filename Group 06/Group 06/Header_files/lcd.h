@@ -92,3 +92,19 @@ int charToInt(char c){
 
 	return num;
 }
+
+
+void lcd_clear()
+{
+	lcdcmd(0x01);
+}
+
+void lcd_line_one()
+{
+	lcdcmd(0x80);
+}
+
+void lcd_line_two()
+{
+	lcdcmd(0xC0);
+}
