@@ -166,14 +166,13 @@ int main(void)
 				
 				DDRE=0xff;
 				
-				lcd_clear();				/* clear LCD */
-				lcd_line_one();		/* enter column and row position */
-				lcd_string("H=",2);
-				lcd_gotoxy(8,0);
-				lcd_string("T= ",2);
+				
+				
 	
 				while(1)
 				{
+					lcd_clear();				/* clear LCD */
+					lcd_line_one();		/* enter column and row position */
 					Request();				/* send start pulse */
 					Response();				/* receive response */
 					I_RH=Receive_data();	/* store first eight bit in I_RH */
@@ -192,22 +191,28 @@ int main(void)
 					{
 						itoa(I_RH,data,10);
 						//lcd_gotoxy(2,0);
-						lcd_string(data,3);
+						lcd_string("H=",2);
+						lcd_string(data,2);
 						lcd_string(".",1);
 			
 						itoa(D_RH,data,10);
-						lcd_string(data,3);
+						
+						lcd_string(data,2);
 						lcd_string("%",1);
 
+						
 						itoa(I_Temp,data,10);
 						//lcd_gotoxy(10,0);
-						lcd_string(data,3);
+						lcd_string("T=",2);
+						lcd_string(data,2);
 						lcd_string(".",1);
 			
 						itoa(D_Temp,data,10);
-						lcd_string(data,3);
+						lcd_string(data,2);
 						lcddata(0xDF);
 						lcd_string("C ",2);
+						
+						lcd_line_two();
 			
 						/*itoa(CheckSum,data,10);
 						lcd_print(data);
@@ -234,7 +239,7 @@ int main(void)
 					{
 			
 			
-						lcd_gotoxy(5,1);
+						//lcd_gotoxy(5,1);
 						lcd_string("FA ON",5);
 			
 						//PORTB=(0<<PINB0);
@@ -246,7 +251,7 @@ int main(void)
 					if ((I_RH + D_RH ) <=75)
 					{
 			
-						lcd_gotoxy(11,1);
+						//lcd_gotoxy(11,1);
 						lcd_string("FO ON",5);
 						//PORTE=(1<<PINE0);
 					}
@@ -260,6 +265,9 @@ int main(void)
 			
 					}*/
 					_delay_ms(100);
+					key = scankey();
+					if(key == '*') break;
+					_delay_ms(1200);
 		
 				}	
 			}
