@@ -21,6 +21,7 @@
 #include "Header_files/lcd.h"
 #include "Header_files/keypad.h"
 #include "Header_files/ultrasonic.h"
+#include "Header_files/dht11.h"
 
 
 
@@ -59,6 +60,7 @@ int main(void)
 		lcd_clear();
 		lcd_string("ENTER COMMAND:",15);
 		key = scankey();
+		char data[5];
 		
 		switch(key)
 		{
@@ -159,7 +161,109 @@ int main(void)
 				if(key == '*') break;
 				}
 			break;		
+			
+			case '4':
+				
+				DDRE=0xff;
+				
+				lcd_clear();				/* clear LCD */
+				lcd_line_one();		/* enter column and row position */
+				lcd_string("H=",2);
+				lcd_gotoxy(8,0);
+				lcd_string("T= ",2);
+	
+				while(1)
+				{
+					Request();				/* send start pulse */
+					Response();				/* receive response */
+					I_RH=Receive_data();	/* store first eight bit in I_RH */
+					D_RH=Receive_data();	/* store next eight bit in D_RH */
+					I_Temp=Receive_data();	/* store next eight bit in I_Temp */
+					D_Temp=Receive_data();	/* store next eight bit in D_Temp */
+					CheckSum=Receive_data();/* store next eight bit in CheckSum */
+		
+					if ((I_RH + D_RH + I_Temp + D_Temp) != CheckSum)
+					{
+						//lcd_gotoxy(0,0);
+						lcd_string("Error",5);
+					}
+		
+					else
+					{
+						itoa(I_RH,data,10);
+						//lcd_gotoxy(2,0);
+						lcd_string(data,3);
+						lcd_string(".",1);
+			
+						itoa(D_RH,data,10);
+						lcd_string(data,3);
+						lcd_string("%",1);
+
+						itoa(I_Temp,data,10);
+						//lcd_gotoxy(10,0);
+						lcd_string(data,3);
+						lcd_string(".",1);
+			
+						itoa(D_Temp,data,10);
+						lcd_string(data,3);
+						lcddata(0xDF);
+						lcd_string("C ",2);
+			
+						/*itoa(CheckSum,data,10);
+						lcd_print(data);
+						lcd_print(" ");*/
+					}
+		
+					_delay_ms(500);
+		
+					if ((I_Temp + D_Temp) <= 24)
+					{
+			
+						lcd_line_one();
+						lcd_string("H ON",4);
+			
+						//PORTB=(1<<PINB0);
+						//PORTB=(0<<PINB1);
+						//PORTC=(0<<PINC0);
+			
+						//DDRB |= (1<<0);
+			
+			
+					}
+					if ((I_Temp + D_Temp) >= 30)
+					{
+			
+			
+						lcd_gotoxy(5,1);
+						lcd_string("FA ON",5);
+			
+						//PORTB=(0<<PINB0);
+						//PORTB=(1<<PINB1);
+						//PORTC=(1<<PINC0);
+						//DDRB |= (1<<1);
+			
+					}
+					if ((I_RH + D_RH ) <=75)
+					{
+			
+						lcd_gotoxy(11,1);
+						lcd_string("FO ON",5);
+						//PORTE=(1<<PINE0);
+					}
+		
+					/*else
+					{
+						lcd_gotoxy(0,0);
+						lcd_print("fogger off");
+						PORTE=(0<<PINE0);
+
+			
+					}*/
+					_delay_ms(100);
+		
+				}	
 			}
+			
 			
 							
 		}
