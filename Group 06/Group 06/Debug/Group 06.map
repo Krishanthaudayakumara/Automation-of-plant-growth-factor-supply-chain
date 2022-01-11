@@ -726,7 +726,7 @@ END GROUP
  *(.fini0)
                 0x0000184e                _etext = .
 
-.data           0x00800100       0xba load address 0x0000184e
+.data           0x00800100       0xbc load address 0x0000184e
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -734,39 +734,39 @@ END GROUP
  *(.rodata)
  *(.rodata*)
  .rodata.str1.1
-                0x00800100       0xb9 main.o
-                                 0xbc (size before relaxing)
+                0x00800100       0xbb main.o
+                                 0xbe (size before relaxing)
  *(.gnu.linkonce.r*)
-                0x008001ba                . = ALIGN (0x2)
- *fill*         0x008001b9        0x1 
-                0x008001ba                _edata = .
-                0x008001ba                PROVIDE (__data_end, .)
+                0x008001bc                . = ALIGN (0x2)
+ *fill*         0x008001bb        0x1 
+                0x008001bc                _edata = .
+                0x008001bc                PROVIDE (__data_end, .)
 
-.bss            0x008001ba        0xb
-                0x008001ba                PROVIDE (__bss_start, .)
+.bss            0x008001bc        0xb
+                0x008001bc                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
- .bss.c         0x008001ba        0x1 main.o
-                0x008001ba                c
+ .bss.c         0x008001bc        0x1 main.o
+                0x008001bc                c
  *(COMMON)
- COMMON         0x008001bb        0xa main.o
-                0x008001bb                previous_distance
-                0x008001bd                distance
-                0x008001bf                key
-                0x008001c0                D_RH
-                0x008001c1                CheckSum
-                0x008001c2                I_Temp
-                0x008001c3                I_RH
-                0x008001c4                D_Temp
-                0x008001c5                PROVIDE (__bss_end, .)
+ COMMON         0x008001bd        0xa main.o
+                0x008001bd                previous_distance
+                0x008001bf                distance
+                0x008001c1                key
+                0x008001c2                D_RH
+                0x008001c3                CheckSum
+                0x008001c4                I_Temp
+                0x008001c5                I_RH
+                0x008001c6                D_Temp
+                0x008001c7                PROVIDE (__bss_end, .)
                 0x0000184e                __data_load_start = LOADADDR (.data)
-                0x00001908                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x0000190a                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x008001c5        0x0
+.noinit         0x008001c7        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x008001c5                _end = .
+                0x008001c7                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0

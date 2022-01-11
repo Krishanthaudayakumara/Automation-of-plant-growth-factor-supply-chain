@@ -3,31 +3,31 @@ Group 06.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         000000ba  00800100  0000184e  000018e2  2**0
+  0 .data         000000bc  00800100  0000184e  000018e2  2**0
                   CONTENTS, ALLOC, LOAD, DATA
   1 .text         0000184e  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .bss          0000000b  008001ba  008001ba  0000199c  2**0
+  2 .bss          0000000b  008001bc  008001bc  0000199e  2**0
                   ALLOC
-  3 .comment      0000005c  00000000  00000000  0000199c  2**0
+  3 .comment      0000005c  00000000  00000000  0000199e  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  000019f8  2**2
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  000019fc  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 000000a8  00000000  00000000  00001a34  2**0
+  5 .debug_aranges 000000a8  00000000  00000000  00001a38  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00001b13  00000000  00000000  00001adc  2**0
+  6 .debug_info   00001b13  00000000  00000000  00001ae0  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00000a88  00000000  00000000  000035ef  2**0
+  7 .debug_abbrev 00000a88  00000000  00000000  000035f3  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00000a59  00000000  00000000  00004077  2**0
+  8 .debug_line   00000a59  00000000  00000000  0000407b  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  000001f4  00000000  00000000  00004ad0  2**2
+  9 .debug_frame  000001f4  00000000  00000000  00004ad4  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    0000059c  00000000  00000000  00004cc4  2**0
+ 10 .debug_str    0000059c  00000000  00000000  00004cc8  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00000ef0  00000000  00000000  00005260  2**0
+ 11 .debug_loc    00000ef0  00000000  00000000  00005264  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 000000b0  00000000  00000000  00006150  2**0
+ 12 .debug_ranges 000000b0  00000000  00000000  00006154  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -151,13 +151,13 @@ Disassembly of section .text:
      124:	02 c0       	rjmp	.+4      	; 0x12a <__do_copy_data+0x10>
      126:	05 90       	lpm	r0, Z+
      128:	0d 92       	st	X+, r0
-     12a:	aa 3b       	cpi	r26, 0xBA	; 186
+     12a:	ac 3b       	cpi	r26, 0xBC	; 188
      12c:	b1 07       	cpc	r27, r17
      12e:	d9 f7       	brne	.-10     	; 0x126 <__do_copy_data+0xc>
 
 00000130 <__do_clear_bss>:
      130:	21 e0       	ldi	r18, 0x01	; 1
-     132:	aa eb       	ldi	r26, 0xBA	; 186
+     132:	ac eb       	ldi	r26, 0xBC	; 188
      134:	b1 e0       	ldi	r27, 0x01	; 1
      136:	01 c0       	rjmp	.+2      	; 0x13a <.do_clear_bss_start>
 
@@ -165,7 +165,7 @@ Disassembly of section .text:
      138:	1d 92       	st	X+, r1
 
 0000013a <.do_clear_bss_start>:
-     13a:	a5 3c       	cpi	r26, 0xC5	; 197
+     13a:	a7 3c       	cpi	r26, 0xC7	; 199
      13c:	b2 07       	cpc	r27, r18
      13e:	e1 f7       	brne	.-8      	; 0x138 <.do_clear_bss_loop>
      140:	0e 94 24 03 	call	0x648	; 0x648 <main>
@@ -1032,18 +1032,18 @@ uint8_t Receive_data()							/* receive data */
      4d6:	83 9b       	sbis	0x10, 3	; 16
      4d8:	09 c0       	rjmp	.+18     	; 0x4ec <Receive_data+0x26>
 		c = (c<<1)|(0x01);						/* then its logic HIGH */
-     4da:	80 91 ba 01 	lds	r24, 0x01BA	; 0x8001ba <__data_end>
+     4da:	80 91 bc 01 	lds	r24, 0x01BC	; 0x8001bc <__data_end>
      4de:	90 e0       	ldi	r25, 0x00	; 0
      4e0:	88 0f       	add	r24, r24
      4e2:	99 1f       	adc	r25, r25
      4e4:	81 60       	ori	r24, 0x01	; 1
-     4e6:	80 93 ba 01 	sts	0x01BA, r24	; 0x8001ba <__data_end>
+     4e6:	80 93 bc 01 	sts	0x01BC, r24	; 0x8001bc <__data_end>
      4ea:	05 c0       	rjmp	.+10     	; 0x4f6 <Receive_data+0x30>
 		else									/* otherwise its logic LOW */
 		c = (c<<1);
-     4ec:	80 91 ba 01 	lds	r24, 0x01BA	; 0x8001ba <__data_end>
+     4ec:	80 91 bc 01 	lds	r24, 0x01BC	; 0x8001bc <__data_end>
      4f0:	88 0f       	add	r24, r24
-     4f2:	80 93 ba 01 	sts	0x01BA, r24	; 0x8001ba <__data_end>
+     4f2:	80 93 bc 01 	sts	0x01BC, r24	; 0x8001bc <__data_end>
 		while(PIND & (1<<DHT11_PIN));
      4f6:	83 99       	sbic	0x10, 3	; 16
      4f8:	fe cf       	rjmp	.-4      	; 0x4f6 <Receive_data+0x30>
@@ -1063,7 +1063,7 @@ uint8_t Receive_data()							/* receive data */
 		while(PIND & (1<<DHT11_PIN));
 	}
 	return c;
-     504:	80 91 ba 01 	lds	r24, 0x01BA	; 0x8001ba <__data_end>
+     504:	80 91 bc 01 	lds	r24, 0x01BC	; 0x8001bc <__data_end>
      508:	08 95       	ret
 
 0000050a <displayKey>:
@@ -1107,11 +1107,11 @@ int displayKey()
 	{
 		key=scankey();
      53e:	0e 94 62 01 	call	0x2c4	; 0x2c4 <scankey>
-     542:	80 93 bf 01 	sts	0x01BF, r24	; 0x8001bf <key>
+     542:	80 93 c1 01 	sts	0x01C1, r24	; 0x8001c1 <key>
 		lcddata(key);
      546:	0e 94 d3 00 	call	0x1a6	; 0x1a6 <lcddata>
 		if(key == '#') break;
-     54a:	80 91 bf 01 	lds	r24, 0x01BF	; 0x8001bf <key>
+     54a:	80 91 c1 01 	lds	r24, 0x01C1	; 0x8001c1 <key>
      54e:	83 32       	cpi	r24, 0x23	; 35
      550:	c9 f0       	breq	.+50     	; 0x584 <displayKey+0x7a>
 		tmpNum = charToInt(key);
@@ -1551,14 +1551,14 @@ int main(void)
      80a:	92 e4       	ldi	r25, 0x42	; 66
      80c:	0e 94 47 05 	call	0xa8e	; 0xa8e <__subsf3>
      810:	0e 94 b4 05 	call	0xb68	; 0xb68 <__fixsfsi>
-     814:	70 93 be 01 	sts	0x01BE, r23	; 0x8001be <distance+0x1>
-     818:	60 93 bd 01 	sts	0x01BD, r22	; 0x8001bd <distance>
+     814:	70 93 c0 01 	sts	0x01C0, r23	; 0x8001c0 <distance+0x1>
+     818:	60 93 bf 01 	sts	0x01BF, r22	; 0x8001bf <distance>
 							
 							
 							
 							if (distance != previous_distance)    
-     81c:	20 91 bb 01 	lds	r18, 0x01BB	; 0x8001bb <previous_distance>
-     820:	30 91 bc 01 	lds	r19, 0x01BC	; 0x8001bc <previous_distance+0x1>
+     81c:	20 91 bd 01 	lds	r18, 0x01BD	; 0x8001bd <previous_distance>
+     820:	30 91 be 01 	lds	r19, 0x01BE	; 0x8001be <previous_distance+0x1>
      824:	26 17       	cp	r18, r22
      826:	37 07       	cpc	r19, r23
      828:	11 f0       	breq	.+4      	; 0x82e <__EEPROM_REGION_LENGTH__+0x2e>
@@ -1586,8 +1586,8 @@ int main(void)
      83e:	be 01       	movw	r22, r28
      840:	6f 5f       	subi	r22, 0xFF	; 255
      842:	7f 4f       	sbci	r23, 0xFF	; 255
-     844:	80 91 bd 01 	lds	r24, 0x01BD	; 0x8001bd <distance>
-     848:	90 91 be 01 	lds	r25, 0x01BE	; 0x8001be <distance+0x1>
+     844:	80 91 bf 01 	lds	r24, 0x01BF	; 0x8001bf <distance>
+     848:	90 91 c0 01 	lds	r25, 0x01C0	; 0x8001c0 <distance+0x1>
      84c:	0e 94 06 09 	call	0x120c	; 0x120c <__itoa_ncheck>
 							
 							itoa(distance, numberString, 10);   
@@ -1605,10 +1605,10 @@ int main(void)
 							
 							
 							previous_distance = distance;
-     864:	80 91 bd 01 	lds	r24, 0x01BD	; 0x8001bd <distance>
-     868:	90 91 be 01 	lds	r25, 0x01BE	; 0x8001be <distance+0x1>
-     86c:	90 93 bc 01 	sts	0x01BC, r25	; 0x8001bc <previous_distance+0x1>
-     870:	80 93 bb 01 	sts	0x01BB, r24	; 0x8001bb <previous_distance>
+     864:	80 91 bf 01 	lds	r24, 0x01BF	; 0x8001bf <distance>
+     868:	90 91 c0 01 	lds	r25, 0x01C0	; 0x8001c0 <distance+0x1>
+     86c:	90 93 be 01 	sts	0x01BE, r25	; 0x8001be <previous_distance+0x1>
+     870:	80 93 bd 01 	sts	0x01BD, r24	; 0x8001bd <previous_distance>
      874:	8b e4       	ldi	r24, 0x4B	; 75
      876:	9d e1       	ldi	r25, 0x1D	; 29
      878:	01 97       	sbiw	r24, 0x01	; 1
@@ -1618,8 +1618,8 @@ int main(void)
 							_delay_ms(30);
 							
 							if(distance<10)
-     880:	80 91 bd 01 	lds	r24, 0x01BD	; 0x8001bd <distance>
-     884:	90 91 be 01 	lds	r25, 0x01BE	; 0x8001be <distance+0x1>
+     880:	80 91 bf 01 	lds	r24, 0x01BF	; 0x8001bf <distance>
+     884:	90 91 c0 01 	lds	r25, 0x01C0	; 0x8001c0 <distance+0x1>
      888:	0a 97       	sbiw	r24, 0x0a	; 10
      88a:	3c f4       	brge	.+14     	; 0x89a <__EEPROM_REGION_LENGTH__+0x9a>
 							{
@@ -1634,8 +1634,8 @@ int main(void)
 								
 							}
 							if(distance>=10)
-     89a:	80 91 bd 01 	lds	r24, 0x01BD	; 0x8001bd <distance>
-     89e:	90 91 be 01 	lds	r25, 0x01BE	; 0x8001be <distance+0x1>
+     89a:	80 91 bf 01 	lds	r24, 0x01BF	; 0x8001bf <distance>
+     89e:	90 91 c0 01 	lds	r25, 0x01C0	; 0x8001c0 <distance+0x1>
      8a2:	0a 97       	sbiw	r24, 0x0a	; 10
      8a4:	3c f0       	brlt	.+14     	; 0x8b4 <__EEPROM_REGION_LENGTH__+0xb4>
 							{
@@ -1697,31 +1697,31 @@ int main(void)
      8e8:	0e 94 59 02 	call	0x4b2	; 0x4b2 <Response>
 					I_RH=Receive_data();	/* store first eight bit in I_RH */
      8ec:	0e 94 63 02 	call	0x4c6	; 0x4c6 <Receive_data>
-     8f0:	80 93 c3 01 	sts	0x01C3, r24	; 0x8001c3 <I_RH>
+     8f0:	80 93 c5 01 	sts	0x01C5, r24	; 0x8001c5 <I_RH>
 					D_RH=Receive_data();	/* store next eight bit in D_RH */
      8f4:	0e 94 63 02 	call	0x4c6	; 0x4c6 <Receive_data>
-     8f8:	80 93 c0 01 	sts	0x01C0, r24	; 0x8001c0 <D_RH>
+     8f8:	80 93 c2 01 	sts	0x01C2, r24	; 0x8001c2 <D_RH>
 					I_Temp=Receive_data();	/* store next eight bit in I_Temp */
      8fc:	0e 94 63 02 	call	0x4c6	; 0x4c6 <Receive_data>
-     900:	80 93 c2 01 	sts	0x01C2, r24	; 0x8001c2 <I_Temp>
+     900:	80 93 c4 01 	sts	0x01C4, r24	; 0x8001c4 <I_Temp>
 					D_Temp=Receive_data();	/* store next eight bit in D_Temp */
      904:	0e 94 63 02 	call	0x4c6	; 0x4c6 <Receive_data>
-     908:	80 93 c4 01 	sts	0x01C4, r24	; 0x8001c4 <D_Temp>
+     908:	80 93 c6 01 	sts	0x01C6, r24	; 0x8001c6 <D_Temp>
 					CheckSum=Receive_data();/* store next eight bit in CheckSum */
      90c:	0e 94 63 02 	call	0x4c6	; 0x4c6 <Receive_data>
-     910:	80 93 c1 01 	sts	0x01C1, r24	; 0x8001c1 <CheckSum>
+     910:	80 93 c3 01 	sts	0x01C3, r24	; 0x8001c3 <CheckSum>
 		
 					if ((I_RH + D_RH + I_Temp + D_Temp) != CheckSum)
-     914:	e0 91 c3 01 	lds	r30, 0x01C3	; 0x8001c3 <I_RH>
+     914:	e0 91 c5 01 	lds	r30, 0x01C5	; 0x8001c5 <I_RH>
      918:	f0 e0       	ldi	r31, 0x00	; 0
-     91a:	90 91 c0 01 	lds	r25, 0x01C0	; 0x8001c0 <D_RH>
+     91a:	90 91 c2 01 	lds	r25, 0x01C2	; 0x8001c2 <D_RH>
      91e:	9f 01       	movw	r18, r30
      920:	29 0f       	add	r18, r25
      922:	31 1d       	adc	r19, r1
-     924:	90 91 c2 01 	lds	r25, 0x01C2	; 0x8001c2 <I_Temp>
+     924:	90 91 c4 01 	lds	r25, 0x01C4	; 0x8001c4 <I_Temp>
      928:	29 0f       	add	r18, r25
      92a:	31 1d       	adc	r19, r1
-     92c:	90 91 c4 01 	lds	r25, 0x01C4	; 0x8001c4 <D_Temp>
+     92c:	90 91 c6 01 	lds	r25, 0x01C6	; 0x8001c6 <D_Temp>
      930:	29 0f       	add	r18, r25
      932:	31 1d       	adc	r19, r1
      934:	48 2f       	mov	r20, r24
@@ -1765,7 +1765,7 @@ int main(void)
      972:	0e 94 e5 00 	call	0x1ca	; 0x1ca <lcd_string>
 			
 						itoa(D_RH,data,10);
-     976:	80 91 c0 01 	lds	r24, 0x01C0	; 0x8001c0 <D_RH>
+     976:	80 91 c2 01 	lds	r24, 0x01C2	; 0x8001c2 <D_RH>
      97a:	4a e0       	ldi	r20, 0x0A	; 10
      97c:	be 01       	movw	r22, r28
      97e:	6b 5f       	subi	r22, 0xFB	; 251
@@ -1786,7 +1786,7 @@ int main(void)
 
 						
 						itoa(I_Temp,data,10);
-     99c:	80 91 c2 01 	lds	r24, 0x01C2	; 0x8001c2 <I_Temp>
+     99c:	80 91 c4 01 	lds	r24, 0x01C4	; 0x8001c4 <I_Temp>
      9a0:	4a e0       	ldi	r20, 0x0A	; 10
      9a2:	be 01       	movw	r22, r28
      9a4:	6b 5f       	subi	r22, 0xFB	; 251
@@ -1811,7 +1811,7 @@ int main(void)
      9c8:	0e 94 e5 00 	call	0x1ca	; 0x1ca <lcd_string>
 			
 						itoa(D_Temp,data,10);
-     9cc:	80 91 c4 01 	lds	r24, 0x01C4	; 0x8001c4 <D_Temp>
+     9cc:	80 91 c6 01 	lds	r24, 0x01C6	; 0x8001c6 <D_Temp>
      9d0:	4a e0       	ldi	r20, 0x0A	; 10
      9d2:	be 01       	movw	r22, r28
      9d4:	6b 5f       	subi	r22, 0xFB	; 251
@@ -1849,16 +1849,16 @@ int main(void)
 					_delay_ms(500);
 		
 					if ((I_Temp + D_Temp) <= 24)
-     a0e:	20 91 c2 01 	lds	r18, 0x01C2	; 0x8001c2 <I_Temp>
-     a12:	80 91 c4 01 	lds	r24, 0x01C4	; 0x8001c4 <D_Temp>
+     a0e:	20 91 c4 01 	lds	r18, 0x01C4	; 0x8001c4 <I_Temp>
+     a12:	80 91 c6 01 	lds	r24, 0x01C6	; 0x8001c6 <D_Temp>
      a16:	90 e0       	ldi	r25, 0x00	; 0
      a18:	82 0f       	add	r24, r18
      a1a:	91 1d       	adc	r25, r1
      a1c:	49 97       	sbiw	r24, 0x19	; 25
      a1e:	2c f4       	brge	.+10     	; 0xa2a <__EEPROM_REGION_LENGTH__+0x22a>
 					{
-						lcd_string("H ON",4);
-     a20:	64 e0       	ldi	r22, 0x04	; 4
+						lcd_string("H ON  ",6);
+     a20:	66 e0       	ldi	r22, 0x06	; 6
      a22:	88 ea       	ldi	r24, 0xA8	; 168
      a24:	91 e0       	ldi	r25, 0x01	; 1
      a26:	0e 94 e5 00 	call	0x1ca	; 0x1ca <lcd_string>
@@ -1868,8 +1868,8 @@ int main(void)
 			
 					}
 					if ((I_Temp + D_Temp) >= 30)
-     a2a:	20 91 c2 01 	lds	r18, 0x01C2	; 0x8001c2 <I_Temp>
-     a2e:	80 91 c4 01 	lds	r24, 0x01C4	; 0x8001c4 <D_Temp>
+     a2a:	20 91 c4 01 	lds	r18, 0x01C4	; 0x8001c4 <I_Temp>
+     a2e:	80 91 c6 01 	lds	r24, 0x01C6	; 0x8001c6 <D_Temp>
      a32:	90 e0       	ldi	r25, 0x00	; 0
      a34:	82 0f       	add	r24, r18
      a36:	91 1d       	adc	r25, r1
@@ -1881,7 +1881,7 @@ int main(void)
 						//lcd_gotoxy(5,1);
 						lcd_string("FA ON",5);
      a3c:	65 e0       	ldi	r22, 0x05	; 5
-     a3e:	8d ea       	ldi	r24, 0xAD	; 173
+     a3e:	8f ea       	ldi	r24, 0xAF	; 175
      a40:	91 e0       	ldi	r25, 0x01	; 1
      a42:	0e 94 e5 00 	call	0x1ca	; 0x1ca <lcd_string>
 						//PORTB=(1<<PINB1);
@@ -1890,8 +1890,8 @@ int main(void)
 			
 					}
 					if ((I_RH + D_RH ) <=75)
-     a46:	20 91 c3 01 	lds	r18, 0x01C3	; 0x8001c3 <I_RH>
-     a4a:	80 91 c0 01 	lds	r24, 0x01C0	; 0x8001c0 <D_RH>
+     a46:	20 91 c5 01 	lds	r18, 0x01C5	; 0x8001c5 <I_RH>
+     a4a:	80 91 c2 01 	lds	r24, 0x01C2	; 0x8001c2 <D_RH>
      a4e:	90 e0       	ldi	r25, 0x00	; 0
      a50:	82 0f       	add	r24, r18
      a52:	91 1d       	adc	r25, r1
@@ -1903,7 +1903,7 @@ int main(void)
 						//lcd_gotoxy(11,1);
 						lcd_string("FO ON",5);
      a5a:	65 e0       	ldi	r22, 0x05	; 5
-     a5c:	83 eb       	ldi	r24, 0xB3	; 179
+     a5c:	85 eb       	ldi	r24, 0xB5	; 181
      a5e:	91 e0       	ldi	r25, 0x01	; 1
      a60:	0e 94 e5 00 	call	0x1ca	; 0x1ca <lcd_string>
      a64:	87 ea       	ldi	r24, 0xA7	; 167
