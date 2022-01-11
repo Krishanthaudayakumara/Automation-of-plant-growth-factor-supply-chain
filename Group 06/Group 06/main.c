@@ -238,7 +238,7 @@ int main(void)
 			
 			
 						//lcd_gotoxy(5,1);
-						lcd_string("FA ON",5);
+						lcd_string("FA ON  ",7);
 			
 						//PORTB=(0<<PINB0);
 						//PORTB=(1<<PINB1);
@@ -250,7 +250,7 @@ int main(void)
 					{
 			
 						//lcd_gotoxy(11,1);
-						lcd_string("FO ON",5);
+						lcd_string("FO ON  ",7);
 						//PORTE=(1<<PINE0);
 					}
 		
