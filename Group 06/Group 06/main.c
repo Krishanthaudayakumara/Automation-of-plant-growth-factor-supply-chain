@@ -223,8 +223,6 @@ int main(void)
 		
 					if ((I_Temp + D_Temp) <= 24)
 					{
-			
-						lcd_line_one();
 						lcd_string("H ON",4);
 			
 						//PORTB=(1<<PINB0);
