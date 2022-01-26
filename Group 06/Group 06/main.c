@@ -316,6 +316,8 @@ int ldrconfig()
 	uint16_t adc_result0;
 	//int i;
 	//int ldr;
+	float i;
+	float ldr;
 	char buffer[10];
 	//DDRC = 0x01;           // to connect led to PC0
 	
@@ -328,8 +330,10 @@ int ldrconfig()
 	
 	while(1)
 	{
-		adc_result0 = adc_read(0);     // read adc value at PA0
-		if(adc_result0){
+		adc_result0 = adc_read(0);
+		i=(adc_result0*0.01/2.1);
+		ldr = (i*10/(5-i));     // read adc value at PA0
+		if(ldr){
 			lcd_string("Read the val",10);
 			_delay_ms(50);
 			lcd_clear();
@@ -343,7 +347,7 @@ int ldrconfig()
 		
 		lcd_line_one();
 		lcd_string("LDR VAL:",9);
-		itoa(adc_result0,buffer,10);   //display ADC value
+		itoa(ldr,buffer,10);   //display ADC value
 		lcd_string(buffer,5);
 		
 		_delay_ms(10);
