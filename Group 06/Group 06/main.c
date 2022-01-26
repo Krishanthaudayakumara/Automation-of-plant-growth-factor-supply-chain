@@ -22,8 +22,9 @@
 #include "Header_files/keypad.h"
 #include "Header_files/ultrasonic.h"
 #include "Header_files/dht11.h"
+#include "Header_files/ldr.h"
 
-
+int ldrconfig();
 
 int main(void)
 
@@ -165,10 +166,6 @@ int main(void)
 			case '4':
 				
 				DDRE=0xff;
-				
-				
-				
-	
 				while(1)
 				{
 					lcd_clear();				/* clear LCD */
@@ -267,7 +264,11 @@ int main(void)
 					if(key == '*') break;
 					_delay_ms(1200);
 		
-				}	
+				}
+				
+		case '5':
+			ldrconfig();
+				
 			}
 			
 			
@@ -309,3 +310,55 @@ int displayKey()
 	return num;
 }
 
+
+int ldrconfig()
+{
+	uint16_t adc_result0;
+	//int i;
+	//int ldr;
+	char buffer[10];
+	//DDRC = 0x01;           // to connect led to PC0
+	
+	// initialize adc and lcd
+	adc_init();
+	lcd_clear();
+
+	
+	_delay_ms(5);
+	
+	while(1)
+	{
+		adc_result0 = adc_read(0);     // read adc value at PA0
+		if(adc_result0){
+			lcd_string("Read the val",10);
+			_delay_ms(50);
+			lcd_clear();
+		}
+		
+		//i=(adc_result0*0.01/2.1);
+		//ldr = (i*10/(5-i));
+		
+		
+		
+		
+		lcd_line_one();
+		lcd_string("LDR VAL:",9);
+		itoa(adc_result0,buffer,10);   //display ADC value
+		lcd_string(buffer,5);
+		
+		_delay_ms(10);
+
+		
+		// condition for led to glow
+		/*if (adc_result0 < LTHRES){
+			PORTC = 0x00;
+		}
+		else{
+			PORTC = 0x01;
+		}
+		*/
+		
+		
+		
+	}
+}
