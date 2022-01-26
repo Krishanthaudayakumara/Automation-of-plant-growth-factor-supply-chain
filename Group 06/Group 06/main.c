@@ -332,13 +332,8 @@ int ldrconfig()
 	{
 		adc_result0 = adc_read(0);
 		i=(adc_result0*0.01/2.1);
-		ldr = (i*10/(5-i));     // read adc value at PA0
-		if(ldr){
-			lcd_string("Read the val",10);
-			_delay_ms(50);
-			lcd_clear();
-		}
-		
+		ldr = (i*10.0/(5.0-i));     // read adc value at PA0
+
 		//i=(adc_result0*0.01/2.1);
 		//ldr = (i*10/(5-i));
 		
