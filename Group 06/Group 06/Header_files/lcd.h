@@ -1,17 +1,26 @@
 #include <stdio.h>
 #include <math.h>
 
-#include<avr/io.h>
+#include <avr/io.h>
 
 #define lcdport PORTA
 
-#define signal PORTB
+#define _signal PORTB
 
 #define en PB2
 
 #define rw PB1
 
 #define rs PB0
+
+
+#define LCD_Data_Dir DDRA				/* Define LCD data port direction */
+#define LCD_Command_Dir DDRB			/* Define LCD command port direction register */
+#define LCD_Data_Port PORTA			/* Define LCD data port */
+#define LCD_Command_Port PORTB
+#define EN PB2							/* Define Enable signal pin */
+#define RW PB1							/* Define Read/Write signal pin */
+#define RS PB0
 
 char key;
 
@@ -55,11 +64,11 @@ void lcdcmd(unsigned char x)
 {
 	lcdport=x;
 
-	signal=(0<<rs)|(0<<rw)|(1<<en);
+	_signal=(0<<rs)|(0<<rw)|(1<<en);
 
 	_delay_ms(1);
 
-	signal=(0<<rs)|(0<<rw)|(0<<en);
+	_signal=(0<<rs)|(0<<rw)|(0<<en);
 
 	_delay_ms(50);
 }
@@ -68,11 +77,11 @@ void lcddata(unsigned char data)
 {
 	lcdport= data;
 
-	signal= (1<<rs)|(0<<rw)|(1<<en);
+	_signal= (1<<rs)|(0<<rw)|(1<<en);
 
 	_delay_ms(1);
 
-	signal= (1<<rs)|(0<<rw)|(0<<en);
+	_signal= (1<<rs)|(0<<rw)|(0<<en);
 
 	_delay_ms(50);
 }
@@ -108,3 +117,14 @@ void lcd_line_two()
 {
 	lcdcmd(0xC0);
 }
+
+void LCD_Char (char char_data)						/* LCD data write function */
+{
+	LCD_Data_Port = char_data;						/* Write data to LCD data port */
+	LCD_Command_Port &= ~(1<<RW);					/* Make RW LOW (Write) */
+	LCD_Command_Port |= (1<<EN)|(1<<RS);			/* Make RS HIGH (data reg.) and High to Low transition on EN (Enable) */
+	_delay_us(1);
+	LCD_Command_Port &= ~(1<<EN);
+	_delay_ms(1);									/* Wait little bit */
+}
+
