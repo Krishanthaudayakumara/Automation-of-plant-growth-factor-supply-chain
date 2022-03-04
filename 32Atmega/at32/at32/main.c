@@ -1,4 +1,10 @@
 /*
+ * at32.c
+ *
+ * Created: 3/3/2022 11:51:31 AM
+ * Author : Krishantha
+ */ 
+/*
  * Group 06.c
  *
  * Created: 12/17/2021 10:15:11 AM
@@ -13,9 +19,6 @@
 #include <string.h>
 #include <stdbool.h>
 
-#include "Header_files/USART_Interrupt.h"				/* include USART Header file */
-#include "Header_files/USART_Interrupt.c"
-
 #define SREG   _SFR_IO8(0x3F)
 
 #include<avr/io.h>
@@ -26,12 +29,11 @@
 #define F_CPU 8000000UL // 1 MHz clock speed
 #endif
 
-#include "Header_files/lcd.h"
-#include "Header_files/keypad.h"
-#include "Header_files/ultrasonic.h"
-#include "Header_files/dht11.h"
-#include "Header_files/ldr.h"
-#include "Header_files/gsm.h"
+#include "include/lcd.c"
+#include "include/keypad.c"
+#include "include/ultrasonic.c"
+#include "include/dht11.c"
+#include "include/ldr.c"
 
 int ldrconfig();
 void get_plantcount();
@@ -94,31 +96,9 @@ int main(void)
 			break;
 				
 			case '5':
-				ldrconfig();
+				
 			break;
 			
-			case '6':
-				buffer_pointer = 0;
-				int is_msg_arrived;
-				memset(message_received, 0, 60);
-				lcdint();
-				USART_Init(9600);						    /* initialize USART communication */
-				sei();
-				lcd_line_one();
-				lcd_string("GSM Initializing",16);
-				_delay_ms(3000);
-				lcd_clear();
-				lcd_string("AT",2);
-				GSM_Begin();								/* check GSM responses and initialize GSM */
-				lcd_clear();
-				
-				for(int a=0;a<2;a++){
-					GSM_Send_Msg("+94773229902","Hi");
-					lcd_string("SD",2);
-					_delay_ms(2000);
-					lcd_clear();
-				}
-				break;
 			
 			default:
 			break;
@@ -161,51 +141,6 @@ int displayKey()
 	return num;
 }
 
-
-int ldrconfig()
-{
-	uint16_t adc_result0;
-	//int i;
-	//int ldr;
-	float i, ldr, temp;
-	char buffer[10];
-	//DDRC = 0x01;           // to connect led to PC0
-	
-	// initialize adc and lcd
-	adc_init();
-	lcd_clear();
-
-	
-	_delay_ms(5);
-	
-	while(1)
-	{
-		adc_result0 = adc_read(0);
-		i=(adc_result0*0.01/2.1);
-		ldr = (i*10.0/(5.0-i));     // read adc value at PA0
-		
-
-		//i=(adc_result0*0.01/2.1);
-		//ldr = (i*10/(5-i));
-		
-		lcd_line_one();
-		lcd_string("LDR VAL:",9);
-		itoa(ldr,buffer,10);   //display ADC value
-		lcd_string(buffer,5);
-		
-		_delay_ms(10);
-
-		
-		// condition for led to glow
-		/*if (adc_result0 < LTHRES){
-			PORTC = 0x00;
-		}
-		else{
-			PORTC = 0x01;
-		}
-		*/
-	}
-}
 
 void get_plantcount(){
 	lcd_clear();
@@ -305,7 +240,7 @@ void water_level(){
 void dht11_output(){
 	
 	char data[5];
-	DDRE=0xff;
+	DDRC=0xff;
 	while(1)
 	{
 		lcd_clear();				/* clear LCD */
@@ -406,3 +341,4 @@ void dht11_output(){
 		
 	}
 }
+
