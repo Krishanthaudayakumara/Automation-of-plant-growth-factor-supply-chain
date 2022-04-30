@@ -18,9 +18,8 @@
 
 #define SREG   _SFR_IO8(0x3F)
 
-#include<avr/io.h>
 
-#include<util/delay.h>
+#include <util/delay.h>
 
 #ifndef F_CPU
 #define F_CPU 8000000UL // 1 MHz clock speed

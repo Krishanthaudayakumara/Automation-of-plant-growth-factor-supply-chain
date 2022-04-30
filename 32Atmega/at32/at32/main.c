@@ -1,9 +1,4 @@
-/*
- * at32.c
- *
- * Created: 3/3/2022 11:51:31 AM
- * Author : Krishantha
- */ 
+
 /*
  * Group 06.c
  *
@@ -40,6 +35,7 @@ void get_plantcount();
 void water_level();
 void dht11_output();
 
+
 int main(void)
 
 {
@@ -48,8 +44,9 @@ int main(void)
 
 	DDRB=0x07;
 
-	DDRD=0xf0;
+	DDRC=0xf0;
 
+	
 	char key;
 	
 
@@ -78,7 +75,7 @@ int main(void)
 
 		
 		switch(key)
-		{
+		{	
 			case '1':
 				lcd_clear();
 				lcd_string("INSTRUCTIONS",12);

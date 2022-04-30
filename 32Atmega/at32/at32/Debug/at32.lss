@@ -19,15 +19,15 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   7 .debug_abbrev 0000080b  00000000  00000000  000034d4  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00000b0e  00000000  00000000  00003cdf  2**0
+  8 .debug_line   00000b00  00000000  00000000  00003cdf  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  00000280  00000000  00000000  000047f0  2**2
+  9 .debug_frame  00000280  00000000  00000000  000047e0  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00000502  00000000  00000000  00004a70  2**0
+ 10 .debug_str    000004e7  00000000  00000000  00004a60  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    0000107c  00000000  00000000  00004f72  2**0
+ 11 .debug_loc    0000107c  00000000  00000000  00004f47  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 000000e0  00000000  00000000  00005fee  2**0
+ 12 .debug_ranges 000000e0  00000000  00000000  00005fc3  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -1469,10 +1469,11 @@ int main(void)
      9f4:	87 e0       	ldi	r24, 0x07	; 7
      9f6:	87 bb       	out	0x17, r24	; 23
 
-	DDRD=0xf0;
+	DDRC=0xf0;
      9f8:	80 ef       	ldi	r24, 0xF0	; 240
-     9fa:	81 bb       	out	0x11, r24	; 17
+     9fa:	84 bb       	out	0x14, r24	; 20
 
+	
 	char key;
 	
 
@@ -1565,7 +1566,7 @@ int main(void)
      a90:	84 33       	cpi	r24, 0x34	; 52
      a92:	79 f0       	breq	.+30     	; 0xab2 <main+0xc2>
      a94:	ec cf       	rjmp	.-40     	; 0xa6e <main+0x7e>
-		{
+		{	
 			case '1':
 				lcd_clear();
      a96:	0e 94 e8 00 	call	0x1d0	; 0x1d0 <lcd_clear>

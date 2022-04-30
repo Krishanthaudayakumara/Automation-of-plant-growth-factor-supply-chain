@@ -35,7 +35,7 @@ void GSM_Begin()
 		}
 		else
 		{
-			lcd_string("Error",5);
+			lcd_string("error",5);
 		}
 	}
 	_delay_ms(1000);

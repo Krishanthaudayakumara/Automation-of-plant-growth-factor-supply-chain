@@ -83,7 +83,7 @@ void lcddata(unsigned char data)
 
 	_signal= (1<<rs)|(0<<rw)|(0<<en);
 
-	_delay_ms(50);
+	_delay_ms(1);
 }
 
 
