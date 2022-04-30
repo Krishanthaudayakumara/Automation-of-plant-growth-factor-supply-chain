@@ -7,7 +7,6 @@
 #define US_ECHO_POS	PB6
 
 
-
 #define US_ERROR		-1
 #define	US_NO_OBSTACLE	-2
 

@@ -13,7 +13,7 @@
 #include <util/delay.h>
 
 #ifndef F_CPU
-#define F_CPU 1000000UL // 1 MHz clock speed
+#define F_CPU 8000000UL // 1 MHz clock speed
 #endif
 #include "lcd.c"
 #include "ldr.c"

@@ -41,11 +41,7 @@ int main(void)
 {
 
 	DDRA=0xff;
-	
-	
-	DDRB=0x07;	
-
-	
+	DDRB=0x07;
 	DDRC=0xf0;
 
 	

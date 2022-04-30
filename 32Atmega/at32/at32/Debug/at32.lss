@@ -1464,14 +1464,9 @@ int main(void)
 	DDRA=0xff;
      9f0:	8f ef       	ldi	r24, 0xFF	; 255
      9f2:	8a bb       	out	0x1a, r24	; 26
-	
-	
 	DDRB=0x07;
      9f4:	87 e0       	ldi	r24, 0x07	; 7
      9f6:	87 bb       	out	0x17, r24	; 23
-	
-
-	
 	DDRC=0xf0;
      9f8:	80 ef       	ldi	r24, 0xF0	; 240
      9fa:	84 bb       	out	0x14, r24	; 20
