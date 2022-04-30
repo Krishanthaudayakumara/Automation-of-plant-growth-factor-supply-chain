@@ -62,7 +62,7 @@ Discarded input sections
  .text.GSM_Wait_for_Msg
                 0x00000000      0x14c main.o
  .text.GSM_Send_Msg
-                0x00000000      0x126 main.o
+                0x00000000      0x120 main.o
  .text.GSM_Calling
                 0x00000000       0x5a main.o
  .text.GSM_HangCall
@@ -350,7 +350,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x5ac
+.text           0x00000000      0x57e
  *(.vectors)
  .vectors       0x00000000       0x54 D:/ProgramFiles/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega32/avr5/crtatmega32.o
                 0x00000000                __vector_default
@@ -431,64 +431,64 @@ END GROUP
                 0x0000008e                __vector_20
                 0x00000092                . = ALIGN (0x2)
  *(.text.*)
- .text.lcdcmd   0x00000092       0x28 main.o
+ .text.lcdcmd   0x00000092       0x22 main.o
                 0x00000092                lcdcmd
- .text.lcdint   0x000000ba       0x38 main.o
-                0x000000ba                lcdint
- .text.lcddata  0x000000f2       0x2a main.o
-                0x000000f2                lcddata
+ .text.lcdint   0x000000b4       0x38 main.o
+                0x000000b4                lcdint
+ .text.lcddata  0x000000ec       0x24 main.o
+                0x000000ec                lcddata
  .text.lcd_string
-                0x0000011c       0x2a main.o
-                0x0000011c                lcd_string
+                0x00000110       0x2a main.o
+                0x00000110                lcd_string
  .text.lcd_clear
-                0x00000146        0x8 main.o
-                0x00000146                lcd_clear
+                0x0000013a        0x8 main.o
+                0x0000013a                lcd_clear
  .text.lcd_line_one
-                0x0000014e        0x8 main.o
-                0x0000014e                lcd_line_one
+                0x00000142        0x8 main.o
+                0x00000142                lcd_line_one
  .text.LCD_Char
-                0x00000156       0x22 main.o
-                0x00000156                LCD_Char
+                0x0000014a       0x1c main.o
+                0x0000014a                LCD_Char
  .text.__vector_13
-                0x00000178       0x4c main.o
-                0x00000178                __vector_13
+                0x00000166       0x4c main.o
+                0x00000166                __vector_13
  .text.GSM_Response_Display
-                0x000001c4       0xc0 main.o
-                0x000001c4                GSM_Response_Display
+                0x000001b2       0xc0 main.o
+                0x000001b2                GSM_Response_Display
  .text.GSM_Response
-                0x00000284      0x102 main.o
-                0x00000284                GSM_Response
+                0x00000272      0x102 main.o
+                0x00000272                GSM_Response
  .text.GSM_Begin
-                0x00000386       0x9c main.o
-                0x00000386                GSM_Begin
- .text.main     0x00000422       0x62 main.o
-                0x00000422                main
+                0x00000374       0x9c main.o
+                0x00000374                GSM_Begin
+ .text.main     0x00000410       0x62 main.o
+                0x00000410                main
  .text.USART_Init
-                0x00000484       0x5c USART_Interrupt.o
-                0x00000484                USART_Init
+                0x00000472       0x40 USART_Interrupt.o
+                0x00000472                USART_Init
  .text.USART_TxChar
-                0x000004e0        0x8 USART_Interrupt.o
-                0x000004e0                USART_TxChar
+                0x000004b2        0x8 USART_Interrupt.o
+                0x000004b2                USART_TxChar
  .text.USART_SendString
-                0x000004e8       0x1e USART_Interrupt.o
-                0x000004e8                USART_SendString
+                0x000004ba       0x1e USART_Interrupt.o
+                0x000004ba                USART_SendString
  .text.libgcc.div
-                0x00000506       0x44 d:/programfiles/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodsi4.o)
-                0x00000506                __udivmodsi4
+                0x000004d8       0x44 d:/programfiles/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodsi4.o)
+                0x000004d8                __udivmodsi4
  .text.avr-libc
-                0x0000054a        0xe d:/programfiles/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(memset.o)
-                0x0000054a                memset
+                0x0000051c        0xe d:/programfiles/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(memset.o)
+                0x0000051c                memset
  .text.avr-libc
-                0x00000558       0x1c d:/programfiles/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strncmp.o)
-                0x00000558                strncmp
+                0x0000052a       0x1c d:/programfiles/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strncmp.o)
+                0x0000052a                strncmp
  .text.avr-libc
-                0x00000574       0x34 d:/programfiles/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strstr.o)
-                0x00000574                strstr
-                0x000005a8                . = ALIGN (0x2)
+                0x00000546       0x34 d:/programfiles/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strstr.o)
+                0x00000546                strstr
+                0x0000057a                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x000005a8        0x0 d:/programfiles/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
-                0x000005a8                _exit
-                0x000005a8                exit
+ .fini9         0x0000057a        0x0 d:/programfiles/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x0000057a                _exit
+                0x0000057a                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -507,11 +507,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x000005a8        0x4 d:/programfiles/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x0000057a        0x4 d:/programfiles/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x000005ac                _etext = .
+                0x0000057e                _etext = .
 
-.data           0x00800060       0x9a load address 0x000005ac
+.data           0x00800060       0x9a load address 0x0000057e
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -541,8 +541,8 @@ END GROUP
                 0x008001aa                message_received
                 0x008001e6                buffer_pointer
                 0x008001e8                PROVIDE (__bss_end, .)
-                0x000005ac                __data_load_start = LOADADDR (.data)
-                0x00000646                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x0000057e                __data_load_start = LOADADDR (.data)
+                0x00000618                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x008001e8        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
@@ -624,11 +624,11 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x1585
+.debug_info     0x00000000     0x1586
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x4e6 D:/ProgramFiles/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega32/avr5/crtatmega32.o
- .debug_info    0x000004e6      0xf7a main.o
- .debug_info    0x00001460      0x125 USART_Interrupt.o
+ .debug_info    0x000004e6      0xf7b main.o
+ .debug_info    0x00001461      0x125 USART_Interrupt.o
 
 .debug_abbrev   0x00000000      0x88e
  *(.debug_abbrev)
@@ -636,29 +636,29 @@ END GROUP
  .debug_abbrev  0x000004a3      0x316 main.o
  .debug_abbrev  0x000007b9       0xd5 USART_Interrupt.o
 
-.debug_line     0x00000000      0xa06
+.debug_line     0x00000000      0xa04
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x115 D:/ProgramFiles/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega32/avr5/crtatmega32.o
  .debug_line    0x00000115      0x7c6 main.o
- .debug_line    0x000008db      0x12b USART_Interrupt.o
+ .debug_line    0x000008db      0x129 USART_Interrupt.o
 
 .debug_frame    0x00000000      0x2fc
  *(.debug_frame)
  .debug_frame   0x00000000      0x29c main.o
  .debug_frame   0x0000029c       0x60 USART_Interrupt.o
 
-.debug_str      0x00000000      0x627
+.debug_str      0x00000000      0x59d
  *(.debug_str)
  .debug_str     0x00000000      0x196 D:/ProgramFiles/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega32/avr5/crtatmega32.o
  .debug_str     0x00000196      0x3da main.o
                                 0x41d (size before relaxing)
- .debug_str     0x00000570       0xb7 USART_Interrupt.o
-                                0x204 (size before relaxing)
+ .debug_str     0x00000570       0x2d USART_Interrupt.o
+                                0x1e1 (size before relaxing)
 
-.debug_loc      0x00000000      0xdec
+.debug_loc      0x00000000      0xdd0
  *(.debug_loc)
- .debug_loc     0x00000000      0xd12 main.o
- .debug_loc     0x00000d12       0xda USART_Interrupt.o
+ .debug_loc     0x00000000      0xcf6 main.o
+ .debug_loc     0x00000cf6       0xda USART_Interrupt.o
 
 .debug_macinfo
  *(.debug_macinfo)

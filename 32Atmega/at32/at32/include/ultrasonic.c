@@ -1,7 +1,7 @@
 
-#define US_PORT PORTC
-#define	US_PIN	PINC
-#define US_DDR 	DDRC
+#define US_PORT PORTB
+#define	US_PIN	PINB
+#define US_DDR 	DDRB
 
 #define US_TRIG_POS	PB5
 #define US_ECHO_POS	PB6

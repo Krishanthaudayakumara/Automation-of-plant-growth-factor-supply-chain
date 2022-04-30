@@ -223,8 +223,8 @@ Disassembly of section .text:
      17e:	00 00       	nop
      180:	81 e0       	ldi	r24, 0x01	; 1
      182:	88 bb       	out	0x18, r24	; 24
-     184:	83 ed       	ldi	r24, 0xD3	; 211
-     186:	90 e3       	ldi	r25, 0x30	; 48
+     184:	81 ee       	ldi	r24, 0xE1	; 225
+     186:	94 e0       	ldi	r25, 0x04	; 4
      188:	01 97       	sbiw	r24, 0x01	; 1
      18a:	f1 f7       	brne	.-4      	; 0x188 <lcddata+0x1a>
      18c:	00 c0       	rjmp	.+0      	; 0x18e <lcddata+0x20>
@@ -373,21 +373,21 @@ Disassembly of section .text:
      298:	08 95       	ret
 
 0000029a <HCSR04Init>:
-     29a:	84 b3       	in	r24, 0x14	; 20
+     29a:	87 b3       	in	r24, 0x17	; 23
      29c:	80 62       	ori	r24, 0x20	; 32
-     29e:	84 bb       	out	0x14, r24	; 20
+     29e:	87 bb       	out	0x17, r24	; 23
      2a0:	08 95       	ret
 
 000002a2 <HCSR04Trigger>:
-     2a2:	85 b3       	in	r24, 0x15	; 21
+     2a2:	88 b3       	in	r24, 0x18	; 24
      2a4:	80 62       	ori	r24, 0x20	; 32
-     2a6:	85 bb       	out	0x15, r24	; 21
+     2a6:	88 bb       	out	0x18, r24	; 24
      2a8:	85 e0       	ldi	r24, 0x05	; 5
      2aa:	8a 95       	dec	r24
      2ac:	f1 f7       	brne	.-4      	; 0x2aa <HCSR04Trigger+0x8>
-     2ae:	85 b3       	in	r24, 0x15	; 21
+     2ae:	88 b3       	in	r24, 0x18	; 24
      2b0:	8f 7d       	andi	r24, 0xDF	; 223
-     2b2:	85 bb       	out	0x15, r24	; 21
+     2b2:	88 bb       	out	0x18, r24	; 24
      2b4:	08 95       	ret
 
 000002b6 <GetPulseWidth>:
@@ -412,7 +412,7 @@ Disassembly of section .text:
      2da:	00 e0       	ldi	r16, 0x00	; 0
      2dc:	10 e0       	ldi	r17, 0x00	; 0
      2de:	15 c0       	rjmp	.+42     	; 0x30a <GetPulseWidth+0x54>
-     2e0:	9e 99       	sbic	0x13, 6	; 19
+     2e0:	b6 99       	sbic	0x16, 6	; 22
      2e2:	25 c0       	rjmp	.+74     	; 0x32e <GetPulseWidth+0x78>
      2e4:	2d 2f       	mov	r18, r29
      2e6:	3c 2f       	mov	r19, r28
@@ -482,7 +482,7 @@ Disassembly of section .text:
      368:	00 e0       	ldi	r16, 0x00	; 0
      36a:	10 e0       	ldi	r17, 0x00	; 0
      36c:	1a c0       	rjmp	.+52     	; 0x3a2 <GetPulseWidth+0xec>
-     36e:	9e 9b       	sbis	0x13, 6	; 19
+     36e:	b6 9b       	sbis	0x16, 6	; 22
      370:	2a c0       	rjmp	.+84     	; 0x3c6 <GetPulseWidth+0x110>
      372:	8c b5       	in	r24, 0x2c	; 44
      374:	9d b5       	in	r25, 0x2d	; 45
@@ -1464,11 +1464,14 @@ int main(void)
 	DDRA=0xff;
      9f0:	8f ef       	ldi	r24, 0xFF	; 255
      9f2:	8a bb       	out	0x1a, r24	; 26
-
+	
+	
 	DDRB=0x07;
      9f4:	87 e0       	ldi	r24, 0x07	; 7
      9f6:	87 bb       	out	0x17, r24	; 23
+	
 
+	
 	DDRC=0xf0;
      9f8:	80 ef       	ldi	r24, 0xF0	; 240
      9fa:	84 bb       	out	0x14, r24	; 20

@@ -1,9 +1,4 @@
-/*
- * USART_Interrupt.c
- *
- * Created: 05/09/2016 4:47:24 PM
- *  Author: amrut
- */ 
+
 
 #include "USART_Interrupt.h"
 

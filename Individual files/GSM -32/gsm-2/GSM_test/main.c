@@ -4,7 +4,7 @@
 * Created: 3/26/2022 12:40:17 PM
 * Author : Krishantha
 */
-#define F_CPU 8000000UL						/* define Clock Frequency */
+#define F_CPU 1000000UL						/* define Clock Frequency */
 #include <avr/io.h>					
 #include <avr/interrupt.h>
 #include <stdio.h>
@@ -42,6 +42,7 @@ int main(void)
 	DDRA=0xff;
 
 	DDRB=0x07;
+	
 	
 	buffer_pointer = 0;
 
