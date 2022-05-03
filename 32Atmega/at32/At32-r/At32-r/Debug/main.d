@@ -21,7 +21,7 @@ main.d main.o: .././main.c \
  .././lcd.c \
  d:\programfiles\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h \
  d:\programfiles\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdarg.h \
- .././ldr.c
+ .././ldr.c .././USART_Interrupt.c .././USART_Interrupt.h .././gsm.c
 
 d:\programfiles\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
 
@@ -68,3 +68,9 @@ d:\programfiles\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\s
 d:\programfiles\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdarg.h:
 
 .././ldr.c:
+
+.././USART_Interrupt.c:
+
+.././USART_Interrupt.h:
+
+.././gsm.c:

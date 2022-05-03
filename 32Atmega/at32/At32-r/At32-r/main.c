@@ -17,6 +17,8 @@
 #endif
 #include "lcd.c"
 #include "ldr.c"
+#include "USART_Interrupt.c"
+#include "gsm.c"
 
 #define SREG   _SFR_IO8(0x3F)
 
@@ -28,7 +30,20 @@ int main(void)
 	DDRB=0xff;
 	DDRD=0x07;
     /* Replace with your application code */
+	buffer_pointer = 0;
+
 	lcdint();
+	USART_Init(9600);						    /* initialize USART communication */
+	sei();
+	lcd_line_one();
+	lcd_string("GSM Initializing",16);
+	_delay_ms(3000);
+	lcd_clear();
+	lcd_line_one();
+	lcd_string("AT",2);
+	GSM_Begin();	
+	GSM_Send_Msg("+94763183978","Hi bro");							/* check GSM responses and initialize GSM */
+	lcd_clear();
 	ldrconfig();
 	_delay_ms(2000);
 
