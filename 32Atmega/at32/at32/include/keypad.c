@@ -86,6 +86,7 @@ char keycheck()
 
 }
 
+
 char scankey()
 {
 	char key='a';

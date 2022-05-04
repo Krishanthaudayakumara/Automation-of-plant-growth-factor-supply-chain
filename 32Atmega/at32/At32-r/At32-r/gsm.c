@@ -35,6 +35,10 @@ char Mobile_no[14];							/* store mobile no. of received message */
 char message_received[60];					/* save received message */
 int position = 0;							/* save location of current message */
 
+int gsm_year,gsm_month,gsm_date,gsm_hours,gsm_minutes,gsm_seconds;
+char GSM_TIME_DATE[128];
+char gsm_buffer[100];
+char pkz[4];
 
 
 
@@ -320,4 +324,49 @@ void GSM_Msg_Display()
 		memset(buff,0,strlen(buff));
 	}
 	status_flag = 0;
+}
+
+
+void gsm_time()
+{
+	//  gsm_cmd("AT+CCLK=\"27/06/21,12:20:12-32\"\r\n", 300,50);
+	
+	gsm_cmd("AT+CCLK?\r\n", 300,50);
+	gsm_cmd("AT+CLTS=1\r\n",300,31);  // Get Local Timestamp
+	gsm_cmd("AT&W\r\n",300,31);  // Get Local Timestamp
+	gsm_cmd("AT+CCLK?\r\n", 300,50);
+	delay(500);
+	
+	if(strstr((char *)gsm_buffer,"+CCLK:"))
+	{
+		memset(pkz,'\0',4);
+		sprintf(pkz,"%c%c",gsm_buffer[19],gsm_buffer[20]);
+		gsm_year=(atoi(pkz));
+		
+		memset(pkz,'\0',4);
+		sprintf(pkz,"%c%c",gsm_buffer[22],gsm_buffer[23]);
+		gsm_month=(atoi(pkz));
+		
+		memset(pkz,'\0',4);
+		sprintf(pkz,"%c%c",gsm_buffer[25],gsm_buffer[26]);
+		gsm_date=(atoi(pkz));
+		
+		
+		memset(pkz,'\0',4);
+		sprintf(pkz,"%c%c",gsm_buffer[28],gsm_buffer[29]);
+		gsm_hours=(atoi(pkz));
+		
+		memset(pkz,'\0',4);
+		sprintf(pkz,"%c%c",gsm_buffer[31],gsm_buffer[32]);
+		gsm_minutes=(atoi(pkz));
+		
+		memset(pkz,'\0',4);
+		sprintf(pkz,"%c%c",gsm_buffer[34],gsm_buffer[35]);
+		gsm_seconds=(atoi(pkz));
+		UART4TransmitString("GSM Date & Time :",sizeof("GSM Date & Time :"));
+		sprintf(GSM_TIME_DATE,"%02d.%02d.%02d : %02d/%02d/%02d\r\n",gsm_hours,gsm_minutes,gsm_seconds,gsm_date,gsm_month,gsm_year);
+		UART4TransmitString(GSM_TIME_DATE,sizeof(GSM_TIME_DATE));
+	}
+	
+	
 }

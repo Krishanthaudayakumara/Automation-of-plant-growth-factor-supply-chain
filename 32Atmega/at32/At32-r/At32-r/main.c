@@ -19,6 +19,7 @@
 #include "ldr.c"
 #include "USART_Interrupt.c"
 #include "gsm.c"
+#include "SPI_slave.c"
 
 #define SREG   _SFR_IO8(0x3F)
 
@@ -27,12 +28,16 @@ int ldrconfig();
 
 int main(void)
 {
+	uint8_t data;
+	char buffer[5];
 	DDRB=0xff;
 	DDRD=0x07;
     /* Replace with your application code */
 	buffer_pointer = 0;
 
 	lcdint();
+	SPIsl_init();
+	
 	USART_Init(9600);						    /* initialize USART communication */
 	sei();
 	lcd_line_one();
@@ -44,6 +49,13 @@ int main(void)
 	GSM_Begin();	
 	GSM_Send_Msg("+94763183978","Hi bro");							/* check GSM responses and initialize GSM */
 	lcd_clear();
+	
+	while(1){
+		data = SPI_Receive();
+		sprintf(buffer, "%d   ", data);
+		lcd_string(buffer,10);
+	}
+	
 	ldrconfig();
 	_delay_ms(2000);
 

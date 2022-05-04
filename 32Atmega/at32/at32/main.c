@@ -29,6 +29,7 @@
 #include "include/ultrasonic.c"
 #include "include/dht11.c"
 #include "include/ldr.c"
+#include "include/spi_master.c"
 
 int ldrconfig();
 void get_plantcount();
@@ -44,11 +45,16 @@ int main(void)
 	DDRB=0x07;
 	DDRC=0xf0;
 
-	
+	uint8_t count = 10;	
+	char buffer[5];
+
+
 	char key;
 	
 
 	lcdint();
+	
+	SPImstr_init();
 	
 	lcd_string("HELLO! WELCOME!",14);
 	_delay_ms(1200);
@@ -91,7 +97,7 @@ int main(void)
 			break;
 				
 			case '5':
-				
+				SPI_write(count);
 			break;
 			
 			

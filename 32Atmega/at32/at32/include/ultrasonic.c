@@ -1,10 +1,10 @@
 
-#define US_PORT PORTB
-#define	US_PIN	PINB
-#define US_DDR 	DDRB
+#define US_PORT PORTD
+#define	US_PIN	PIND
+#define US_DDR 	DDRD
 
-#define US_TRIG_POS	PB5
-#define US_ECHO_POS	PB6
+#define US_TRIG_POS	PD0
+#define US_ECHO_POS	PD1
 
 
 #define US_ERROR		-1
