@@ -27,13 +27,16 @@
 #include "include/lcd.c"
 #include "include/keypad.c"
 #include "include/ultrasonic.c"
+#include "include/ultrasonic_2.c"
 #include "include/dht11.c"
 #include "include/ldr.c"
 #include "include/spi_master.c"
+#include "include/functions.c"
 
 int ldrconfig();
 void get_plantcount();
 void water_level();
+void nt_level();
 void dht11_output();
 
 
@@ -45,17 +48,15 @@ int main(void)
 	DDRB=0x07;
 	DDRC=0xf0;
 
-	uint8_t count = 10;	
 	char buffer[5];
-
-
 	char key;
+	int wtrperPlant, fertilizerPlant, humMin = 0, humMax, temprtMin, temprtMax;
 	
 
 	lcdint();
 	
 	SPImstr_init();
-	
+	/*
 	lcd_string("HELLO! WELCOME!",14);
 	_delay_ms(1200);
 	lcd_line_two();
@@ -66,7 +67,15 @@ int main(void)
 	lcd_line_one();
 	lcd_string("ENTER 1 TO",10);
 	lcd_line_two();
-	lcd_string("INSTRUCTIONS",12);
+	lcd_string("Configure",12);
+	_delay_ms(1200);
+	*/
+	
+	lcd_clear();
+	lcd_line_one();
+	lcd_string("ENTER 2 TO",10);
+	lcd_line_two();
+	lcd_string("Activate system",16);
 	_delay_ms(1200);
 
 	
@@ -83,21 +92,37 @@ int main(void)
 			case '1':
 				lcd_clear();
 				lcd_string("INSTRUCTIONS",12);
+				get_plantcount();
+				wtrperPlant = waterPerPlant();
+				fertilizerPlant = fertilizePerPlant();
+				humMin = humidityMin();
+				humMax = humidityMax();
+				temprtMin = tempMin();
+				temprtMax = tempMax();
+
 				break;
 			case '2':
-				get_plantcount();
+				
+			while(1){
+				if(!humMin == 0) {
+					dht11_output(humMin,humMax,temprtMin,temprtMax);
+
+				} else dht11_output(75,85,23,29);
+				water_level();
+				_delay_ms(500);
+				nt_level();
+				_delay_ms(1000);
+
+			}
 				break;
 				
 			case '3':
-				water_level();
 			break;		
 			
 			case '4':
-				dht11_output();
 			break;
 				
 			case '5':
-				SPI_write(count);
 			break;
 			
 			
@@ -165,6 +190,8 @@ void get_plantcount(){
 
 void water_level(){
 	char numberString[4];
+	uint8_t spiSignal = 2;
+
 	while(1) {
 		
 		uint16_t r;
@@ -217,6 +244,10 @@ void water_level(){
 				{
 					lcd_line_two();
 					lcd_string("WATER LOW!!!",13);
+					_delay_ms(500);
+					SPI_write(spiSignal);
+					break;
+
 					// PORTA=(1<<PINA0);
 					
 				}
@@ -224,21 +255,107 @@ void water_level(){
 				{
 					lcd_line_two();
 					lcd_string("ENOUGH WATER",12);
+					break;
 					// PORTA=(0<<PINA0);
 					
 				}
 				key = scankey();
-				if(key == '*') break;
+				break;
 				_delay_ms(1200);
 				
 			}
+			break;
 		}
 		
-		if(key == '*') break;
+		break;
 	}
 }
 
-void dht11_output(){
+
+void nt_level(){
+	char numberString[4];
+	uint8_t spiSignal = 3;
+
+	while(1) {
+		
+		uint16_t r;
+		
+		_delay_ms(100);
+
+		lcd_clear();
+		
+		
+		HCSR04Init_2();
+
+		while(1)
+		{
+			HCSR04Trigger_2();
+			r=GetPulseWidth_2();
+			if(r==US_ERROR)
+			{
+				lcd_clear();
+				lcd_string("E!",2);
+				_delay_ms(1000);
+				
+			}
+			else
+			{
+				
+				distance=50-(r*0.034/2.0);
+				
+				
+				
+				if (distance != previous_distance)
+				{
+					lcd_clear();
+				}
+				
+				
+				
+				lcd_line_one();
+				lcd_string("NT LV =",8);
+				
+				itoa(distance, numberString, 10);
+				lcd_string(numberString,3);
+
+				lcd_string("cm",2);
+				
+				
+				previous_distance = distance;
+				_delay_ms(30);
+				
+				if(distance<10)
+				{
+					lcd_line_two();
+					lcd_string("NT LEVEL LOW!!!",15);
+					_delay_ms(500);
+					SPI_write(spiSignal);
+					break;
+
+					// PORTA=(1<<PINA0);
+					
+				}
+				if(distance>=10)
+				{
+					lcd_line_two();
+					lcd_string("ENOUGH NT LEVEL",16);
+					break;
+					// PORTA=(0<<PINA0);
+					
+				}
+				key = scankey();
+				break;
+				_delay_ms(1200);
+				
+			}
+			break;
+		}
+		
+		break;
+	}
+}
+
+void dht11_output(int humMin, int humMax, int temprtMin, int temprtMax){
 	
 	char data[5];
 	DDRC=0xff;
@@ -294,7 +411,7 @@ void dht11_output(){
 		
 		_delay_ms(500);
 		
-		if ((I_Temp + D_Temp) <= 24)
+		if ((I_Temp + D_Temp) <= temprtMin)
 		{
 			lcd_string("H ON  ",6);
 			
@@ -306,7 +423,7 @@ void dht11_output(){
 			
 			
 		}
-		if ((I_Temp + D_Temp) >= 30)
+		if ((I_Temp + D_Temp) >= temprtMax)
 		{
 			
 			
@@ -318,8 +435,8 @@ void dht11_output(){
 			//PORTC=(1<<PINC0);
 			//DDRB |= (1<<1);
 			
-		}
-		if ((I_RH + D_RH ) <=75)
+	}
+		if ((I_RH + D_RH ) <= humMax)
 		{
 			
 			//lcd_gotoxy(11,1);
@@ -327,18 +444,23 @@ void dht11_output(){
 			//PORTE=(1<<PINE0);
 		}
 		
-		/*else
+		else 
 		{
-			lcd_gotoxy(0,0);
-			lcd_print("fogger off");
-			PORTE=(0<<PINE0);
+			
+			lcd_string("FO OFF  ",7);
+			//PORTE=(0<<PINE0);
 
 			
-		}*/
+		}
+		_delay_ms(2000);
+	
+		/*
 		_delay_ms(100);
 		key = scankey();
 		if(key == '*') break;
 		_delay_ms(1200);
+		*/
+		break;
 		
 	}
 }

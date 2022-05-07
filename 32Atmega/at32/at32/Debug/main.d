@@ -21,7 +21,8 @@ main.d main.o: .././main.c \
  d:\programfiles\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay.h \
  d:\programfiles\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
  .././include/lcd.c .././include/keypad.c .././include/ultrasonic.c \
- .././include/dht11.c .././include/ldr.c .././include/spi_master.c
+ .././include/ultrasonic_2.c .././include/dht11.c .././include/ldr.c \
+ .././include/spi_master.c .././include/functions.c
 
 d:\programfiles\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
 
@@ -71,8 +72,12 @@ d:\programfiles\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\u
 
 .././include/ultrasonic.c:
 
+.././include/ultrasonic_2.c:
+
 .././include/dht11.c:
 
 .././include/ldr.c:
 
 .././include/spi_master.c:
+
+.././include/functions.c:

@@ -28,7 +28,7 @@ int ldrconfig();
 
 int main(void)
 {
-	uint8_t data;
+	uint8_t data, sent_wt = 0, sent_nt = 0;
 	char buffer[5];
 	DDRB=0xff;
 	DDRD=0x07;
@@ -47,17 +47,48 @@ int main(void)
 	lcd_line_one();
 	lcd_string("AT",2);
 	GSM_Begin();	
-	GSM_Send_Msg("+94763183978","Hi bro");							/* check GSM responses and initialize GSM */
 	lcd_clear();
+	int ldr = ldrconfig();
+	_delay_ms(2000);
 	
 	while(1){
+		lcd_clear();
 		data = SPI_Receive();
-		sprintf(buffer, "%d   ", data);
-		lcd_string(buffer,10);
+		if (data == 2) {
+			lcd_string("WATER LOW!",10);
+			_delay_ms(100);
+			if (sent_wt == 0)
+			{
+				GSM_Send_Msg("+94763183978","Water low! Please fill the Tank");
+				sent_wt = 1;
+			}
+			
+			lcd_clear();
+			lcd_string("MESSAGE SENT!",13);
+			_delay_ms(500);
+			break;
+
+		}
+		if (data==3)
+		{
+			lcd_string("NUTRIENT LOW!",14);
+			_delay_ms(100);
+			if (sent_nt == 0)
+			{
+				GSM_Send_Msg("+94763183978","Water low! Please fill the Tank");
+				sent_nt = 1;
+			}
+			
+			lcd_clear();
+			lcd_string("MESSAGE SENT!",13);
+			_delay_ms(500);
+			break;
+		}
+		
+		break;
 	}
 	
-	ldrconfig();
-	_delay_ms(2000);
+	
 
    
 }
@@ -84,7 +115,7 @@ int ldrconfig()
 	{
 		adc_result0 = adc_read(0);
 		i=(adc_result0*0.01/2.1);
-		ldr = (i*10.0/(5.0-i));     // read adc value at PA0
+		ldr = (i*10.0/(5.0-i))-1;     // read adc value at PA0
 		
 
 		//i=(adc_result0*0.01/2.1);
@@ -106,5 +137,8 @@ int ldrconfig()
 			PORTC = 0x01;
 		}
 		*/
+		break;
 	}
+
+	return ldr;
 }
