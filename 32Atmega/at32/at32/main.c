@@ -44,6 +44,10 @@ int main(void)
 
 {
 
+	DDRD |= 1 << PIND4;
+	DDRD |= 1 << PIND5;
+	DDRD |= 1 << PIND6;
+	
 	DDRA=0xff;
 	DDRB=0x07;
 	DDRC=0xf0;
@@ -141,6 +145,7 @@ int main(void)
 
 int displayKey()
 {
+	
 	int tmpNum;
 	int data[10];
 	int i = 0;
@@ -332,7 +337,7 @@ void nt_level(){
 					SPI_write(spiSignal);
 					break;
 
-					// PORTA=(1<<PINA0);
+					
 					
 				}
 				if(distance>=10)
@@ -340,7 +345,7 @@ void nt_level(){
 					lcd_line_two();
 					lcd_string("ENOUGH NT LEVEL",16);
 					break;
-					// PORTA=(0<<PINA0);
+					
 					
 				}
 				key = scankey();
@@ -415,40 +420,57 @@ void dht11_output(int humMin, int humMax, int temprtMin, int temprtMax){
 		{
 			lcd_string("H ON  ",6);
 			
-			//PORTB=(1<<PINB0);
-			//PORTB=(0<<PINB1);
-			//PORTC=(0<<PINC0);
 			
-			//DDRB |= (1<<0);
+			PORTD |= 1 << PIND4;
 			
+			
+		}
+		else
+		{
+			
+			
+			
+			PORTD &= ~(1 << PIND4);
+
 			
 		}
 		if ((I_Temp + D_Temp) >= temprtMax)
 		{
 			
 			
-			//lcd_gotoxy(5,1);
+			
 			lcd_string("FA ON  ",7);
 			
-			//PORTB=(0<<PINB0);
-			//PORTB=(1<<PINB1);
-			//PORTC=(1<<PINC0);
-			//DDRB |= (1<<1);
+			PORTD |= 1 << PIND5;
 			
 	}
+	   else
+	   {
+		   
+		  
+		   
+		   PORTD &= ~(1 << PIND5);
+
+		   
+	   }
+	   
 		if ((I_RH + D_RH ) <= humMax)
 		{
 			
-			//lcd_gotoxy(11,1);
+			
 			lcd_string("FO ON  ",7);
-			//PORTE=(1<<PINE0);
+			
+			PORTD |= 1 << PIND6;
+			
 		}
 		
 		else 
 		{
 			
 			lcd_string("FO OFF  ",7);
-			//PORTE=(0<<PINE0);
+			
+			PORTD &= ~(1 << PIND6);
+			
 
 			
 		}

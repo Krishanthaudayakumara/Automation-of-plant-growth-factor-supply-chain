@@ -3,7 +3,7 @@
 
  #include <avr/io.h>
 
- #define lcdport PORTC
+ #define lcdport PORTD
 
  #define _signal PORTB
 
@@ -14,9 +14,9 @@
  #define rs PB0
 
 
- #define LCD_Data_Dir DDRC				/* Define LCD data port direction */
+ #define LCD_Data_Dir DDRD				/* Define LCD data port direction */
  #define LCD_Command_Dir DDRB			/* Define LCD command port direction register */
- #define LCD_Data_Port PORTC			/* Define LCD data port */
+ #define LCD_Data_Port PORTD			/* Define LCD data port */
  #define LCD_Command_Port PORTB
  #define EN PB2							/* Define Enable signal pin */
  #define RW PB1							/* Define Read/Write signal pin */
