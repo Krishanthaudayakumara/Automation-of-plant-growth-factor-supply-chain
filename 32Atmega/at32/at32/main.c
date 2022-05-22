@@ -44,7 +44,8 @@ int main(void)
 
 {
 
-	DDRA=0xff;
+	DDRA = DDRA | (1<<5) | (1<<6) | (1<<7);
+
 	DDRB=0x07;
 	DDRC=0xf0;
 
@@ -70,6 +71,8 @@ int main(void)
 	lcd_string("Configure",12);
 	_delay_ms(1200);
 	*/
+	
+
 	
 	lcd_clear();
 	lcd_line_one();
@@ -102,8 +105,10 @@ int main(void)
 
 				break;
 			case '2':
-				
+			
 			while(1){
+				SPI_write(1);
+
 				if(!humMin == 0) {
 					dht11_output(humMin,humMax,temprtMin,temprtMax);
 
@@ -111,12 +116,16 @@ int main(void)
 				water_level();
 				_delay_ms(500);
 				nt_level();
-				_delay_ms(1000);
+				_delay_ms(500);
+				int ldr = ldrconfig();
+				_delay_ms(500);
 
 			}
 				break;
 				
 			case '3':
+				SPI_write(8);
+
 			break;		
 			
 			case '4':
@@ -409,8 +418,7 @@ void dht11_output(int humMin, int humMax, int temprtMin, int temprtMax){
 			lcd_print(" ");*/
 		}
 		
-		_delay_ms(500);
-		
+				
 		if ((I_Temp + D_Temp) <= temprtMin)
 		{
 			lcd_string("H ON  ",6);
@@ -452,7 +460,7 @@ void dht11_output(int humMin, int humMax, int temprtMin, int temprtMax){
 
 			
 		}
-		_delay_ms(2000);
+		_delay_ms(1000);
 	
 		/*
 		_delay_ms(100);
@@ -465,3 +473,51 @@ void dht11_output(int humMin, int humMax, int temprtMin, int temprtMax){
 	}
 }
 
+
+int ldrconfig()
+{
+	uint16_t adc_result0;
+	//int i;
+	//int ldr;
+	float i, ldr, temp;
+	char buffer[10];
+	//DDRC = 0x01;           // to connect led to PC0
+	
+	// initialize adc and lcd
+	adc_init();
+	lcd_clear();
+
+	
+	_delay_ms(5);
+	
+	while(1)
+	{
+		adc_result0 = adc_read(0);
+		i=(adc_result0*0.01/2.1);
+		ldr = (i*10.0/(5.0-i))-1;     // read adc value at PA0
+		
+
+		//i=(adc_result0*0.01/2.1);
+		//ldr = (i*10/(5-i));
+		
+		lcd_line_one();
+		lcd_string("LDR VAL:",9);
+		itoa(ldr,buffer,10);   //display ADC value
+		lcd_string(buffer,5);
+		
+		_delay_ms(10);
+
+		
+		// condition for led to glow
+		/*if (adc_result0 < LTHRES){
+			PORTC = 0x00;
+		}
+		else{
+			PORTC = 0x01;
+		}
+		*/
+		break;
+	}
+
+	return ldr;
+}

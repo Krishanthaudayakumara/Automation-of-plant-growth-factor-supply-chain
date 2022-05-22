@@ -21,8 +21,8 @@ main.d main.o: .././main.c \
  .././lcd.c \
  d:\programfiles\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h \
  d:\programfiles\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdarg.h \
- .././ldr.c .././USART_Interrupt.c .././USART_Interrupt.h .././gsm.c \
- .././SPI_slave.c
+ .././USART_Interrupt.c .././USART_Interrupt.h .././gsm.c \
+ .././SPI_slave.c .././I2C_Master_H_file.h .././I2C_Master_C_file.c
 
 d:\programfiles\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
 
@@ -68,8 +68,6 @@ d:\programfiles\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\s
 
 d:\programfiles\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdarg.h:
 
-.././ldr.c:
-
 .././USART_Interrupt.c:
 
 .././USART_Interrupt.h:
@@ -77,3 +75,7 @@ d:\programfiles\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5
 .././gsm.c:
 
 .././SPI_slave.c:
+
+.././I2C_Master_H_file.h:
+
+.././I2C_Master_C_file.c:
